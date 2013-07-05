@@ -1,0 +1,18 @@
+@font-face {
+  font-family: 'Josefin Sans';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Josefin Sans Light'), local('JosefinSans-Light'), url(/static/fonts/C6HYlRF50SGJq1XyXj04z2Fp2sMiApZm5Dx7NpSTOZk.woff) format('woff');
+}
+@font-face {
+  font-family: 'Josefin Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Josefin Sans'), local('JosefinSans'), url(/static/fonts/xgzbb53t8j-Mo-vYa23n5nhCUOGz7vYGh680lGh-uXM.woff) format('woff');
+}
+@font-face {
+  font-family: 'Josefin Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Josefin Sans Bold'), local('JosefinSans-Bold'), url(/static/fonts/C6HYlRF50SGJq1XyXj04z3l4twXkwp3_u9ZoePkT564.woff) format('woff');
+}

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}New Collection{% end %}
+{% block body %}
+<div class="row-fluid">
+	<div class="span12">
+		<form class="form-horizontal" method="POST" action="/notebook/collections">
+			{% module xsrf_form_html() %}
+			<input type="hidden" name="method" value="newcollection">
+			<div class="control-group">
+				<label class="control-label" for="inputCollectionname">Collection Name</label>
+				<div class="controls">
+					<input type="text" id="inputCollectionname" placeholder="Collection Name" name="collectionname">
+				</div>
+			</div>
+			<div class="control-group">
+				<div class="controls">
+					<button type="submit" class="btn btn-primary">Create Collection</button>
+					<a class="btn" href="javascript:history.back();">Back</a>
+				</div>		
+			</div>
+		</form>
+	</div>
+</div>
+{% end %}

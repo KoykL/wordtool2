@@ -1,0 +1,25 @@
+{% extends "notebook.html" %}
+{% block title %}Collections{% end %}
+{% block activecollection %}active{% end %}
+{% block mainbody %}
+<div class="row-fluid">
+	<div class="span6">
+		<a href="/notebook/collections/new_form" class="btn btn-block"><i class="icon-plus-sign"></i>New Collection</a>
+	</div>
+	<div class="span6">
+		<a href="/notebook/collections/manage" class="btn btn-block"><i class="icon-list"></i>Manage Collections</a>
+	</div>
+</div>
+{% for group in collections %}
+	<div class="row-fluid">
+		{% for collection, preview in group %}
+		<div class="span4">
+			<a href="/notebook/collections/{{ collection }}" class="btn btn-block btn-large">{{ collection }}</a>
+			<p class="well">
+				{{ preview }}
+			</p>
+		</div>
+		{% end %}
+	</div>
+{% end %}
+{% end %}

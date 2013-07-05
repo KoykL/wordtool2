@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Managing Collections{% end %}
+{% block morehead %}
+<script src="/static/js/managecollections.js"></script>
+{% end %}
+{% block body %}
+<div class="row-fluid">
+	<div class="span12">
+		<a href="/notebook/collections" class="btn-link"><i class=" icon-arrow-left"></i>Back to Collections</a>
+	</div>
+</div>
+<div class="row-fluid">
+	<div class="span12">
+	<table class="table table-bordered">
+		{% for group in collectionsGrouped %}
+		<tr>
+			{% for eachCollection in group %}
+			<td>
+				<p>{{ eachCollection }} <a class="btn btn-danger btn-mini pull-right w-delete-button" deleteId="{{ eachCollection }}" href="javascript:;">Delete</a></p>	
+			</td>
+			{% end %}
+		</tr>
+		{% end %}
+	</table>
+	</div>
+</div>
+{% end %}
