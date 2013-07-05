@@ -4,7 +4,11 @@ import helper, requestDispatch, dicts
 import review, user
 class BaseHandler(tornado.web.RequestHandler):
 	def get_current_user(self):
-		return self.get_secure_cookie("username").decode('utf-8')
+		username = self.get_secure_cookie("username")
+		if username:
+			return username.decode('utf-8')
+		else:
+			return None
 class MainHandler(BaseHandler):
 	def get(self):
 		self.render('index.html')
@@ -26,7 +30,7 @@ class AuthorizationHandler(BaseHandler):
 class LogoutHandler(BaseHandler):
 	@tornado.web.authenticated
 	def get(self):
-		self.set_secure_cookie("username", '')
+		self.clear_cookie("username")
 		redirectUrl='/'
 		try:
 			redirectUrl = self.get_argument('next')
