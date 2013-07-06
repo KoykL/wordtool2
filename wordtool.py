@@ -26,13 +26,13 @@ application = tornado.wsgi.WSGIApplication([
 	(r"/notebook/collections", handlers.CollectionsHandler),
 	(r"/notebook/collections/manage", handlers.ManageCollectionsHandler),
 	(r"/notebook/collections/new_form", handlers.NewCollectionHandler),
-	(r"/notebook/collections/([0-9a-zA-Z\-_ ]+)", handlers.CollectionHandler),
-	(r"/notebook/collections/([0-9a-zA-Z\-_ ]+)/new_form", handlers.NewListHandler),
-	(r"/notebook/collections/([0-9a-zA-Z\-_ ]+)/manage", handlers.ListsManageHandler),
-	(r"/notebook/collections/([0-9a-zA-Z\-_ ]+)/list([0-9]+)", handlers.ListsHandler),
+	(r"/notebook/collections/([0-9a-zA-Z\-_\s]+)", handlers.CollectionHandler),
+	(r"/notebook/collections/([0-9a-zA-Z\-_\s]+)/new_form", handlers.NewListHandler),
+	(r"/notebook/collections/([0-9a-zA-Z\-_\s]+)/manage", handlers.ListsManageHandler),
+	(r"/notebook/collections/([0-9a-zA-Z\-_\s]+)/list([0-9]+)", handlers.ListsHandler),
 	(r"/notebook/reviewlist", handlers.ReviewListHandler),
 	(r"/notebook/reviewlist/reviewsystem", handlers.ReviewHandler),
-	(r"/notebook/reviewlist/reviewsystem/definition/([0-9a-zA-Z\-_ ]+)", handlers.DefHandler),
+	(r"/notebook/reviewlist/reviewsystem/definition/([0-9a-zA-Z\-_\s]+)", handlers.DefHandler),
 	(r"/static/(.+)", tornado.web.StaticFileHandler)
 ], **settings)
 db = persistence.Persistence()
