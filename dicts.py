@@ -6,7 +6,7 @@ class BaseDict:
 		pass
 	def getDef(self, word):
 		raise NotImplementedError()
-class _YouDaoDict:
+class YouDaoDict:
 	def __init__(BaseDict):
 		pass
 	def getDef(self, word):
@@ -16,7 +16,7 @@ class _YouDaoDict:
 			defElements = soup.select('#phrsListTab > .trans-container > ul > li')
 			defs = [str(defElement.string) for defElement in defElements]
 			return defs
-class YouDaoDict:
+class CibaDict:
 	def __init__(BaseDict):
 		pass
 	def getDef(self, word):
