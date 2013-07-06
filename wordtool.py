@@ -7,7 +7,7 @@ import handlers, persistence
 import config
 
 settings = {
-	'debug': True, 
+	'debug': config.getDebug(), 
 	'template_path': "views", 
 	'static_path': 'static',
 	'ui_modules': uimodules,
