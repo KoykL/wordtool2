@@ -2,7 +2,7 @@ listGetLastRow=function(){
 	return $("#wordtablebody tr:last-child").filter(":last");
 };
 makeDeleteBtn=function(word){
-	return $('<a>').addClass('btn btn-danger btn-mini pull-right').text('delete').attr('delete-id', word)
+	return $('<a>').addClass('btn btn-danger btn-mini pull-right delete-word-btn').text('delete').attr('delete-id', word);
 }
 appendColumn=function(lastrow, word){
 	lastrow.append($("<td>").append($("<p>").text(word).addClass('text-center').append(makeDeleteBtn(word))));
