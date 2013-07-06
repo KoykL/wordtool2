@@ -1,17 +1,25 @@
 {% extends "base.html" %}
 {% block title %}Definition: {{ word }}{% end %}
+{% block morehead %}
+<script src="/static/js/def.js"></script>
+{% end %}
 {% block body %}
 	<div class="row-fluid">
 		<div class="span12">
-			<p class="text-center lead">{{ word }}</p>
+			<p class="text-center lead"  word-id='{{ word }}' id='word'>{{ word }}</p>
 		</div>
 	</div>
 	<div class="row-fluid">
 		<div class="span12">
 			<p class="well lead text-center">{{ definition }}</p>
 		</div>
-		<div class="span12 text-center">
-			<a href="/notebook/reviewlist/reviewsystem" class="btn btn-large btn-primary">Return To Next Word</a>
+	</div>
+	<div class="row-fluid">
+		<div class="span3 offset3" >
+			<a href="javascript:;" class="btn btn-primary" id='remember-btn'>I remember it.</a>
+		</div>
+		<div class="span3" >
+			<a href="javascript:;" class="btn pull-right" id='forget-btn'>I forget it.</a>
 		</div>
 	</div>
 {% end %}

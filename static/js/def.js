@@ -1,6 +1,6 @@
 successHandler=function(data){
 	if (data.status_code == 200){
-		window.location.reload()
+		window.location = "/notebook/reviewlist/reviewsystem"
 	} else if (data.status_code == 210){
 		window.location = "/notebook/reviewlist"
 	}
