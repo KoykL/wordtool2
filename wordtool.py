@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 import gevent.monkey
 gevent.monkey.patch_all()
 import tornado.web, tornado.wsgi, uimodules
@@ -29,7 +30,7 @@ application = tornado.wsgi.WSGIApplication([
 	(r"/notebook/collections/([0-9a-zA-Z\-_ ]+)/list([0-9]+)", handlers.ListsHandler),
 	(r"/notebook/reviewlist", handlers.ReviewListHandler),
 	(r"/notebook/reviewlist/reviewsystem", handlers.ReviewHandler),
-	(r"/notebook/reviewlist/reviewsystem/showdefinition/([0-9a-zA-Z\-_ ]+)", handlers.DefHandler),
+	(r"/notebook/reviewlist/reviewsystem/definition/([0-9a-zA-Z\-_ ]+)", handlers.DefHandler),
 	(r"/static/(.+)", tornado.web.StaticFileHandler)
 ], **settings)
 db = persistence.Persistence()
