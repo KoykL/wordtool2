@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+import os
 import gevent.monkey
 gevent.monkey.patch_all()
 import tornado.web, tornado.wsgi, uimodules
@@ -45,8 +46,12 @@ def start_server(server, process_count):
 if __name__ == "__main__":
 	from socketio.server import SocketIOServer
 	import socket
-	s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-	s.bind(('0.0.0.0', 8097))
+	s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+	try:
+		os.unlink('/tmp/wordtool.socket')
+	except OSError:
+		pass
+	s.bind('/tmp/wordtool.socket')
 	s.listen(10000)
 	server = SocketIOServer(s, application, policy_server = False)
 	start_server(server, 3)
