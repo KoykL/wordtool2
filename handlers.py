@@ -44,6 +44,8 @@ class LoginFormHandler(BaseHandler):
 			redirectUrl = self.get_argument('next')
 		except tornado.web.MissingArgumentError:
 			pass
+		if current_user:
+			self.redirect(redirectUrl)
 		self.render("loginform.html", redirectUrl=redirectUrl)
 class SignUpFormHandler(BaseHandler):
 	def get(self):
