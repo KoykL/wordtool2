@@ -11,7 +11,7 @@ settings = {
 	'template_path': "views", 
 	'static_path': 'static',
 	'ui_modules': uimodules,
-	'cookie_secret': getSecrete(),
+	'cookie_secret': config.getSecrete(),
 	"login_url": "/login",
 	"xsrf_cookies": True
 }
