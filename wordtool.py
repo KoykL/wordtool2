@@ -4,13 +4,14 @@ import gevent.monkey
 gevent.monkey.patch_all()
 import tornado.web, tornado.wsgi, uimodules
 import handlers, persistence
+import config
 
 settings = {
 	'debug': True, 
 	'template_path': "views", 
 	'static_path': 'static',
 	'ui_modules': uimodules,
-	'cookie_secret': "__TODO:_GENERATE_YOUR_OWN_RANDOM_VALUE_HERE__",
+	'cookie_secret': getSecrete(),
 	"login_url": "/login",
 	"xsrf_cookies": True
 }
