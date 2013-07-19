@@ -164,7 +164,7 @@ class ReviewListHandler(BaseHandler):
 	def get (self):
 		l = self._rdb.getWords()
 		l = l if l else ""
-		l = itertools.islice(l, 50)
+		l = itertools.islice(l, 3000)
 		l = " ".join(l)
 		self.render("reviewlist.html", reviewlist = l)
 	@tornado.web.authenticated
