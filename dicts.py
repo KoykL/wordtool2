@@ -48,7 +48,7 @@ class YouDaoDict():
 		else:
 			return None
 class CachedYouDaoDict(YouDaoDict):
-	def __init__(self, db):
+	def __init__(self, word, db):
 		self._db = db
 		super().__init__(word)
 	def getCacheDef(self, word):
