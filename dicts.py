@@ -10,11 +10,16 @@ class BaseDict:
 class YouDaoDict():
 	def __init__(self, word):
 		self.word = word
+		self.inited = False
 	def getSoup(self):
 		query = urllib.parse.urlencode({'q':self.word})
 		with urllib.request.urlopen('http://dict.youdao.com/search?{query}'.format(query=query)) as f:
 			#self.soup = bs4.BeautifulSoup(f, "lxml")
 			self.soup = bs4.BeautifulSoup(f, "html.parser")
+	def lazyInit(self):
+		if not self.inited:
+			self.getSoup()
+			self.inited = True
 	def getDef(self):
 		soup = self.soup
 		defElements = soup.select('#phrsListTab > .trans-container > ul > li')
@@ -32,7 +37,7 @@ class YouDaoDict():
 	def getDefAndEgSen(self):
 		defs = self.getDef(word)
 		sen = self.getDef(word)
-		if defs != None || sen != None:
+		if (defs != None) and (sen != None):
 			d = {
 				"Definition": defs,
 				"Example Sentence": sen
@@ -63,7 +68,7 @@ class CachedYouDaoDict(YouDaoDict):
 	def getCache(self, word):
 		defs = self.getCacheDef(word)
 		sen = self.getCacheSen(word)
-		if defs != None || sen != None:
+		if (defs != None) and (sen != None):
 			d = {
 				"Definition": defs,
 				"Example Sentence": sen
