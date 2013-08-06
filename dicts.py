@@ -61,6 +61,8 @@ class CachedYouDaoDict(YouDaoDict):
 			return None
 		else:
 			d = doc['Definition']
+			if d = []:
+				d.append("")	
 			return d	
 	def getCacheSen(self):
 		word = self.word
@@ -72,6 +74,8 @@ class CachedYouDaoDict(YouDaoDict):
 			return None
 		else:
 			d = [tuple(each) for each in doc["Example Sentence"]]
+			if d = []:
+				d.append(("",""))
 			return d
 	def getCache(self):
 		word = self.word
