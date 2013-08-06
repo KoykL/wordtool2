@@ -14,7 +14,7 @@ class YouDaoDict():
 	def getSoup(self):
 		query = urllib.parse.urlencode({'q':self.word})
 		with urllib.request.urlopen('http://dict.youdao.com/search?{query}'.format(query=query)) as f:
-			self.soup = bs4.BeautifulSoup(f, "lxml")
+			self.soup = bs4.BeautifulSoup(f)
 			#self.soup = bs4.BeautifulSoup(f, "html.parser")
 	def lazyInit(self):
 		if not self.inited:
@@ -92,8 +92,12 @@ class CachedYouDaoDict(YouDaoDict):
 			return None
 	def setCacheDef(self, definition):
 		word = self.word
+		if definition == [""]:
+			return
 		self._db.cachedWords.update({'word': word}, {'$set': {'Definition': definition}}, upsert = True)
 	def setCacheSen(self, sentence):
+		if sentence == [("","")]:
+			return
 		word = self.word
 		self._db.cachedWords.update({'word': word}, {'$set': {'Example Sentence': [list(each) for each in sentence]}}, upsert = True)
 	def getDef(self):
