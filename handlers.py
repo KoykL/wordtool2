@@ -2,6 +2,7 @@ import tornado.web
 import json, re, itertools
 import helper, requestDispatch, dicts
 import review, user
+import random
 class BaseHandler(tornado.web.RequestHandler):
 	def get_current_user(self):
 		username = self.get_secure_cookie("username")
@@ -248,7 +249,10 @@ class DefHandler(BaseHandler):
 	def get (self, word):
 		d = dicts.YouDaoDict()
 		defs = " ".join(d.getDef(word))
-		self.render('def.html', definition=defs, word=word)
+		sen = random.choice(d.getEgSentence())
+		engSen = sen[0]
+		chnSen = sen[1]
+		self.render('def.html', definition=defs, word=word, engSentence = engSen, chnSentence = chnSen)
 class NewCollectionHandler(BaseHandler):
 	@tornado.web.authenticated
 	def get(self):
