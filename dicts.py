@@ -60,7 +60,7 @@ class CachedYouDaoDict(YouDaoDict):
 		except (IndexError, KeyError):
 			return None
 		else:
-			d = doc['Definition'],
+			d = doc['Definition']
 			return d	
 	def getCacheSen(self):
 		word = self.word
