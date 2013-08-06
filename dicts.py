@@ -21,13 +21,13 @@ class YouDaoDict():
 			self.getSoup()
 			self.inited = True
 	def getDef(self):
-		lazyInit()
+		self.lazyInit()
 		soup = self.soup
 		defElements = soup.select('#phrsListTab > .trans-container > ul > li')
 		defs = [str(defElement.string) for defElement in defElements]
 		return defs
 	def getEgSentence(self):
-		lazyInit()
+		self.lazyInit()
 		def extractSen(s):
 			eng = " ".join(s.find_all("p")[0].stripped_strings)
 			eng = re.sub(r'\s*\.',r'.',eng)
