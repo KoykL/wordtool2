@@ -54,21 +54,24 @@ class CachedYouDaoDict(YouDaoDict):
 	def getCacheDef(self):
 		word = self.word
 		doc = self._db.cachedWords.find({'word':word}, {'Definition': True})
-		if doc:
+		try:
 			doc = doc[0]
+		except IndexError:
+			return None
+		else:
 			d = doc['Definition'],
 			return d
-		else:
-			return None
+			
 	def getCacheSen(self):
 		word = self.word
 		doc = self._db.cachedWords.find({'word':word}, {'Example Sentence': True})
-		if doc:
+		try:
 			doc = doc[0]
+		except IndexError:
+			return None
+		else:
 			d = [tuple(each) for each in doc["Example Sentence"]]
 			return d
-		else:
-			return None
 	def getCache(self):
 		word = self.word
 		defs = self.getCacheDef()
