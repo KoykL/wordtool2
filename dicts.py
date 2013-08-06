@@ -25,6 +25,8 @@ class YouDaoDict():
 		soup = self.soup
 		defElements = soup.select('#phrsListTab > .trans-container > ul > li')
 		defs = [str(defElement.string) for defElement in defElements]
+		if defs == []:
+				defs.append("")	
 		return defs
 	def getEgSentence(self):
 		self.lazyInit()
@@ -35,7 +37,10 @@ class YouDaoDict():
 			return (eng, chn)
 		soup = self.soup
 		senElements = soup.select('#bilingual > ul > li')
-		return [extractSen(sen) for sen in senElements]
+		sen = [extractSen(sen) for sen in senElements]
+		if sen == []:
+				sen.append(("",""))
+		return sen
 	def getDefAndEgSen(self):
 		defs = self.getDef(word)
 		sen = self.getDef(word)
@@ -61,8 +66,6 @@ class CachedYouDaoDict(YouDaoDict):
 			return None
 		else:
 			d = doc['Definition']
-			if d == []:
-				d.append("")	
 			return d	
 	def getCacheSen(self):
 		word = self.word
@@ -73,9 +76,7 @@ class CachedYouDaoDict(YouDaoDict):
 		except (IndexError, KeyError):
 			return None
 		else:
-			d = [tuple(each) for each in doc["Example Sentence"]]
-			if d == []:
-				d.append(("",""))
+			d = [tuple(each) for each in doc["Example Sentence"]]	
 			return d
 	def getCache(self):
 		word = self.word
