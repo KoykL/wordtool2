@@ -51,7 +51,8 @@ class CachedYouDaoDict(YouDaoDict):
 	def __init__(self, word, db):
 		self._db = db
 		super().__init__(word)
-	def getCacheDef(self, word):
+	def getCacheDef(self):
+		word = self.word
 		doc = self._db.cachedWords.find({'word':word}, {'Definition': True})
 		if doc:
 			doc = doc[0]
@@ -59,7 +60,8 @@ class CachedYouDaoDict(YouDaoDict):
 			return d
 		else:
 			return None
-	def getCacheSen(self, word):
+	def getCacheSen(self):
+		word = self.word
 		doc = self._db.cachedWords.find({'word':word}, {'Example Sentence': True})
 		if doc:
 			doc = doc[0]
@@ -67,9 +69,10 @@ class CachedYouDaoDict(YouDaoDict):
 			return d
 		else:
 			return None
-	def getCache(self, word):
-		defs = self.getCacheDef(word)
-		sen = self.getCacheSen(word)
+	def getCache(self):
+		word = self.word
+		defs = self.getCacheDef()
+		sen = self.getCacheSen()
 		if (defs != None) and (sen != None):
 			d = {
 				"Definition": defs,
@@ -78,23 +81,25 @@ class CachedYouDaoDict(YouDaoDict):
 			return d
 		else:
 			return None
-	def setCacheDef(self, word, definition):
+	def setCacheDef(self, definition):
+		word = self.word
 		self._db.cachedWords.update({'word': word}, {'$set': {'Definition': definition}}, {'upsert': True})
-	def setCacheSen(self, word, sentence):
+	def setCacheSen(self, sentence):
+		word = self.word
 		self._db.cachedWords.update({'word': word}, {'$set': {'Example Sentence': [list(each) for each in sentence]}}, {'upsert': True})
-	def getDef(self, word):
-		d = self.getCacheDef(word)
+	def getDef(self):
+		d = self.getCacheDef()
 		if d:
 			return d
 		mydef = super().getDef()
-		self.setCacheDef(word, mydef)
+		self.setCacheDef(mydef)
 		return mydef
-	def getEgSentence(self, word):
-		d = self.getCacheSen(word)
+	def getEgSentence(self):
+		d = self.getCacheSen()
 		if d:
 			return d
 		sen = super().getEgSentence()
-		self.setCacheSen(word, sen)
+		self.setCacheSen(sen)
 		return sen
 	def getDefAndEgSen(self):
 		raise NotImplementedError()
