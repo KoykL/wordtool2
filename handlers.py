@@ -247,8 +247,8 @@ class ReviewHandler(BaseHandler):
 class DefHandler(BaseHandler):
 	@tornado.web.authenticated
 	def get (self, word):
-		d = dicts.YouDaoDict()
-		defs = " ".join(d.getDef(word))
+		d = dicts.YouDaoDict(word)
+		defs = " ".join(d.getDef())
 		sen = random.choice(d.getEgSentence())
 		engSen = sen[0]
 		chnSen = sen[1]
