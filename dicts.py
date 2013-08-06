@@ -88,7 +88,7 @@ class CachedYouDaoDict(YouDaoDict):
 		self.setCacheDef(word, mydef)
 		return mydef
 	def getEgSentence(self, word):
-		d = self.getCacheSen(word):
+		d = self.getCacheSen(word)
 		if d:
 			return d
 		sen = super().getEgSentence()
