@@ -14,8 +14,8 @@ class YouDaoDict():
 	def getSoup(self):
 		query = urllib.parse.urlencode({'q':self.word})
 		with urllib.request.urlopen('http://dict.youdao.com/search?{query}'.format(query=query)) as f:
-			self.soup = bs4.BeautifulSoup(f)
-			#self.soup = bs4.BeautifulSoup(f, "html.parser")
+			#self.soup = bs4.BeautifulSoup(f, "lxml")
+			self.soup = bs4.BeautifulSoup(f, "html.parser")
 	def lazyInit(self):
 		if not self.inited:
 			self.getSoup()
