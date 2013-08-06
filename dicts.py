@@ -81,7 +81,7 @@ class CachedYouDaoDict(YouDaoDict):
 	def setCacheSen(self, word, sentence):
 		self._db.cachedWords.update({'word': word}, {'$set': {'Example Sentence': [list(each) for each in sentence]}}, {'upsert': True})
 	def getDef(self, word):
-		d = self.getCacheDef(word):
+		d = self.getCacheDef(word)
 		if d:
 			return d
 		mydef = super().getDef()
