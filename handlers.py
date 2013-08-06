@@ -251,7 +251,7 @@ class DefHandler(BaseHandler):
 		d = dicts.CachedYouDaoDict(word, db)
 		defs = " ".join(d.getDef())
 		sens = d.getEgSentence()
-		sen = ""
+		sen = ("", "")
 		if sens != []:
 			sen = random.choice(sens)
 		engSen = sen[0]
