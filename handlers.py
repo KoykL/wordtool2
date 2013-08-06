@@ -250,7 +250,10 @@ class DefHandler(BaseHandler):
 		db=self.application.db.getUnderlyingDb()
 		d = dicts.CachedYouDaoDict(word, db)
 		defs = " ".join(d.getDef())
-		sen = random.choice(d.getEgSentence())
+		sens = d.getEgSentence()
+		sen = ""
+		if sens != []:
+			sen = random.choice(sens)
 		engSen = sen[0]
 		chnSen = sen[1]
 		self.render('def.html', definition=defs, word=word, engSentence = engSen, chnSentence = chnSen)
