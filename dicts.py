@@ -66,7 +66,10 @@ class CachedYouDaoDict(YouDaoDict):
 			return None
 		else:
 			d = doc['Definition']
-			return d	
+			if d == [""]:
+				return None
+			else:
+				return d	
 	def getCacheSen(self):
 		word = self.word
 		doc = self._db.cachedWords.find({'word':word}, {'Example Sentence': True})
@@ -77,6 +80,8 @@ class CachedYouDaoDict(YouDaoDict):
 			return None
 		else:
 			d = [tuple(each) for each in doc["Example Sentence"]]	
+			if sentence == [("","")]:
+				return None
 			return d
 	def getCache(self):
 		word = self.word
@@ -92,12 +97,8 @@ class CachedYouDaoDict(YouDaoDict):
 			return None
 	def setCacheDef(self, definition):
 		word = self.word
-		if definition == [""]:
-			return
 		self._db.cachedWords.update({'word': word}, {'$set': {'Definition': definition}}, upsert = True)
 	def setCacheSen(self, sentence):
-		if sentence == [("","")]:
-			return
 		word = self.word
 		self._db.cachedWords.update({'word': word}, {'$set': {'Example Sentence': [list(each) for each in sentence]}}, upsert = True)
 	def getDef(self):
