@@ -80,7 +80,7 @@ class CachedYouDaoDict(YouDaoDict):
 			return None
 		else:
 			d = [tuple(each) for each in doc["Example Sentence"]]	
-			if sentence == [("","")]:
+			if d == [("","")]:
 				return None
 			return d
 	def getCache(self):
