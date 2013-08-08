@@ -206,12 +206,12 @@ class ReviewHandler(BaseHandler):
 		word = self._rdb.getWordDoc()
 		if word == None:
 			self.redirect("/notebook/reviewlist")
-		self.render('review.html', word=word['word'], collection=word['belongTo']['collection'], list='list' + word['belongTo']['list'])
+		self.render('review.html', word=word['word'], collection=word['belongTo']['collection'], list=word['belongTo']['list'])
 	@tornado.web.authenticated
 	def post(self):
 		word = self.get_argument('word')
 		collection = self.get_argument('collection')
-		list = self.get_argument('list')
+		list = int(self.get_argument('list'))
 		state = self.get_argument('state')
 		def reply(state):
 			if state == 'end':
