@@ -1,4 +1,5 @@
 import pymongo
+import itertools
 #This module is a transition between the structure used by underlying database and abstracted one used throughout wordtool.
 class CollectionDatabase:
 	def __init__(self):
@@ -40,7 +41,8 @@ class Persistence:
 		return doc['collectionName']
 	def _getPreviewFromDoc(self, doc):
 		lists = doc['lists']
-		return " ".join(" ".join(map(self._getWordNamePartFromDoc, list)) for list in lists)[:50]
+		iter = (word for list in lists for word in map(self._getWordNamePartFromDoc, list))
+		return " ".join(itertools.islice(iter, 10))
 	def _getWordNamePartFromDoc(self, doc):
 		return doc['name']
 	def _getCollectionNameAndPreviewFromDoc(self, doc):
