@@ -6,18 +6,22 @@ successHandler=function(data){
 	}
 }
 rememberHandler=function(){
-	var word = $('#word').attr('word-id')
+	var word = $('#word').text()
 	var postdata = {
 		word: word,
+		collection: $(this).attr('collection-id'),
+		list: $(this).attr('list-id'),
 		state: 'remember'
 	};
 	$.xsrfPost('/notebook/reviewlist/reviewsystem', postdata,successHandler,'json')
 };
 forgetHandler=function(){
-	var word = $('#word').attr('word-id')
+	var word = $('#word').text()
 	var postdata = {
 		word: word,
-		state: 'forget'
+		collection: $(this).attr('collection-id'),
+		list: $(this).attr('list-id'),
+		state: 'remember'
 	};
 	$.xsrfPost('/notebook/reviewlist/reviewsystem', postdata,successHandler,'json')
 };

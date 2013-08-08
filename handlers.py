@@ -203,13 +203,15 @@ class ReviewHandler(BaseHandler):
 		self._rdb = review.Review(db, self.current_user)
 	@tornado.web.authenticated
 	def get(self):
-		word = self._rdb.getWord()
+		word = self._rdb.getWordDoc()
 		if word == None:
 			self.redirect("/notebook/reviewlist")
-		self.render('review.html', word=word)
+		self.render('review.html', word=word['word'], collection=word['belongTo']['collection'], list='list' + word['belongTo']['list'])
 	@tornado.web.authenticated
 	def post(self):
 		word = self.get_argument('word')
+		collection = self.get_argument('collection')
+		list = self.get_argument('list')
 		state = self.get_argument('state')
 		def reply(state):
 			if state == 'end':
@@ -217,20 +219,21 @@ class ReviewHandler(BaseHandler):
 			else:
 				self.write(helper.makeRpl(200, 'Success.'))
 		def rememberWorker():
-			self._rdb.removeReviewListWord(word)
-			self._rdb.reviewDone(word)
+			self._rdb.removeReviewListWordFromSingleList(word)
+			self._rdb.reviewDone(collection, list, word)
 			if self._rdb.getWord() == None:
 				reply('end')
 			else:
 				reply('not end')
 		def forgetWorker():
 			self._rdb.downRviewListWordPriority(word)
-			if self._rdb.isTotured(word):
+			if self._rdb.isTotured(collection, list, word):
 				if not self.application.db.collectionisExisted(self.current_user, 'tortured'):
 					self.application.db.insertCollection(self.current_user, 'tortured')
 				if not self.application.db.collectionisInited(self.current_user, 'tortured'):
 					self.application.db.addList(self.current_user, 'tortured')
-				self.application.db.addWord(self.current_user, 'tortured', 1, word)
+				listsLen = int(self.application.db.getListsLen())
+				self.application.db.addWord(self.current_user, 'tortured', listsLen, word)
 			if self._rdb.getWord() == None:
 				reply('end')
 			else:
@@ -247,6 +250,15 @@ class ReviewHandler(BaseHandler):
 class DefHandler(BaseHandler):
 	@tornado.web.authenticated
 	def get (self, word):
+		fromWhere = {}
+		try:
+			fromcollection = self.get_argument('fromcollection')
+			fromlist = self.get_argument('fromlist')
+		except tornado.web.MissingArgumentError:
+			pass
+		else:
+			fromWhere['fromcollection'] = fromcollection
+			fromWhere['fromlist'] = fromlist
 		db=self.application.db.getUnderlyingDb()
 		d = dicts.CachedYouDaoDict(word, db)
 		defs = " ".join(d.getDef())
@@ -254,7 +266,7 @@ class DefHandler(BaseHandler):
 		sen = random.choice(sens)
 		engSen = sen[0]
 		chnSen = sen[1]
-		self.render('def.html', definition=defs, word=word, engSentence = engSen, chnSentence = chnSen)
+		self.render('def.html', definition=defs, word=word, engSentence = engSen, chnSentence = chnSen, fromWhere=fromWhere)
 class NewCollectionHandler(BaseHandler):
 	@tornado.web.authenticated
 	def get(self):

@@ -61,7 +61,7 @@ class Persistence:
 		return map(self._getWordNamePartFromDoc, docs)
 	def getListsLen(self, username, collectionName):
 		doc = self._db.getCollectionDocByName(username, collectionName, {'listslen': True})
-		return doc['listslen']
+		return int(doc['listslen'])
 	#End of Read Region
 	#Write Region
 	def addList(self, username, collectionName):

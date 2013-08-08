@@ -6,7 +6,7 @@
 {% block body %}
 	<div class="row-fluid">
 		<div class="span12">
-			<p class="text-center lead"  word-id='{{ word }}' id='word'>{{ word }}</p>
+			<p class="text-center lead" id='word'>{{ word }}</p>
 		</div>
 	</div>
 	<div class="row-fluid">
@@ -20,12 +20,14 @@
 			<p class="well text-center">Translation: {{ chnSentence }}</p>
 		</div>
 	</div>
+	{% if fromWhere %}
 	<div class="row-fluid">
 		<div class="span3 offset3" >
-			<a href="javascript:;" class="btn btn-primary" id='remember-btn'>I remember it.</a>
+			<a href="javascript:;" class="btn btn-primary" collection-id="{{ fromWhere['collection'] }}" list-id="{{ fromWhere['list'] }}" id='remember-btn'>I remember it.</a>
 		</div>
 		<div class="span3" >
-			<a href="javascript:;" class="btn pull-right" id='forget-btn'>I forget it.</a>
+			<a href="javascript:;" class="btn pull-right" collection-id="{{ fromWhere['collection'] }}" list-id="{{ fromWhere['list'] }}" id='forget-btn'>I forget it.</a>
 		</div>
 	</div>
+	{% end %}
 {% end %}
