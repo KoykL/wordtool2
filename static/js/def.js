@@ -21,7 +21,7 @@ forgetHandler=function(){
 		word: word,
 		collection: $(this).attr('collection-id'),
 		list: $(this).attr('list-id'),
-		state: 'remember'
+		state: 'forget'
 	};
 	$.xsrfPost('/notebook/reviewlist/reviewsystem', postdata,successHandler,'json')
 };
