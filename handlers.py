@@ -211,7 +211,7 @@ class ReviewHandler(BaseHandler):
 	def post(self):
 		word = self.get_argument('word')
 		collection = self.get_argument('collection')
-		list = int(self.get_argument('list'))
+		list = self.get_argument('list')
 		state = self.get_argument('state')
 		def reply(state):
 			if state == 'end':
