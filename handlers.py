@@ -219,14 +219,14 @@ class ReviewHandler(BaseHandler):
 			else:
 				self.write(helper.makeRpl(200, 'Success.'))
 		def rememberWorker():
-			self._rdb.removeReviewListWordFromSingleList(word)
+			self._rdb.removeReviewListWordFromSingleList(collection, list, word)
 			self._rdb.reviewDone(collection, list, word)
 			if self._rdb.getWord() == None:
 				reply('end')
 			else:
 				reply('not end')
 		def forgetWorker():
-			self._rdb.downRviewListWordPriority(word)
+			self._rdb.downRviewListWordPriority(collection, list, word)
 			if self._rdb.isTotured(collection, list, word):
 				if not self.application.db.collectionisExisted(self.current_user, 'tortured'):
 					self.application.db.insertCollection(self.current_user, 'tortured')

@@ -104,23 +104,14 @@ class Review:
 		random.shuffle(shouldReviewList)
 		self._per.insertReviewSysPack(shouldReviewList)
 	def getWord(self):
-		if self._per.reviewPackisExsisted():
-			return self._per.getWord()
-		else:
-			self.createReviewPack()
-			return self._per.getWord()
+		self.createReviewPack()
+		return self._per.getWord()
 	def getWordDoc(self):
-		if self._per.reviewPackisExsisted():
-			return self._per.getWordDocFromReviewPackRandom()
-		else:
-			self.createReviewPack()
-			return self._per.getWordDocFromReviewPackRandom()
+		self.createReviewPack()
+		return self._per.getWordDocFromReviewPackRandom()
 	def getWords(self):
-		if self._per.reviewPackisExsisted():
-			return self._per.getWords()
-		else:
-			self.createReviewPack()
-			return self._per.getWords()
+		self.createReviewPack()
+		return self._per.getWords()
 	def addToReviewList(self, words, CollectionName, listNum):
 		self._per.insertReviewList(words, CollectionName, listNum)
 	#deprecated
