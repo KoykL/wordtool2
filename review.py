@@ -117,9 +117,9 @@ class Review:
 	#deprecated
 	def _addSingleWordDoc(self, word):
 		self._per.insertReviewSysPack([word])
-	def removeReviewListWordsFromSingleList(self, collection, list, words):
+	def removeReviewListWordsFromSingleList(self, collection, listnum, words):
 		words = list(words)
-		self._per.removeReviewListWordsFromSingleList( collection, list, words)
+		self._per.removeReviewListWordsFromSingleList( collection, listnum, words)
 	def removeReviewListWordFromSingleList(self, collection, list, word):
 		words = [word]
 		self.removeReviewListWordsFromSingleList(collection, list, words)
