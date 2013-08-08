@@ -257,8 +257,8 @@ class DefHandler(BaseHandler):
 		except tornado.web.MissingArgumentError:
 			pass
 		else:
-			fromWhere['fromcollection'] = fromcollection
-			fromWhere['fromlist'] = fromlist
+			fromWhere['collection'] = fromcollection
+			fromWhere['list'] = fromlist
 		db=self.application.db.getUnderlyingDb()
 		d = dicts.CachedYouDaoDict(word, db)
 		defs = " ".join(d.getDef())
