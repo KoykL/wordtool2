@@ -1,8 +1,8 @@
 successHandler=function(data){
 	if (data.status_code == 200){
-		window.location = "/notebook/reviewlist/reviewsystem"
+		window.location = "/notebook/review"
 	} else if (data.status_code == 210){
-		window.location = "/notebook/reviewlist"
+		window.location = "/notebook/review/"
 	}
 }
 rememberHandler=function(){
@@ -13,7 +13,7 @@ rememberHandler=function(){
 		list: $(this).attr('list-id'),
 		state: 'remember'
 	};
-	$.xsrfPost('/notebook/reviewlist/reviewsystem', postdata,successHandler,'json')
+	$.xsrfPost('/notebook/review', postdata,successHandler,'json')
 };
 forgetHandler=function(){
 	var word = $('#word').text()
@@ -23,7 +23,7 @@ forgetHandler=function(){
 		list: $(this).attr('list-id'),
 		state: 'forget'
 	};
-	$.xsrfPost('/notebook/reviewlist/reviewsystem', postdata,successHandler,'json')
+	$.xsrfPost('/notebook/review', postdata,successHandler,'json')
 };
 $(function(){
 	$('#remember-btn').click(rememberHandler)

@@ -70,7 +70,7 @@ addReviewListHandler=function(){
 		'collectionname': collection,
 		'listnum': listnum
 	};
-	$.xsrfPost('/notebook/reviewlist', postdata, addReviewListCallback, 'json');
+	$.xsrfPost('/notebook/review/', postdata, addReviewListCallback, 'json');
 };
 $(function(){
 	$('#newlistbtn').click(newListHandler);
