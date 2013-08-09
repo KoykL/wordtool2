@@ -30,9 +30,9 @@ application = tornado.wsgi.WSGIApplication([
 	(r"/notebook/collections/([0-9a-zA-Z\-_%]+)/new_form", handlers.NewListHandler),
 	(r"/notebook/collections/([0-9a-zA-Z\-_%]+)/manage", handlers.ListsManageHandler),
 	(r"/notebook/collections/([0-9a-zA-Z\-_%]+)/list([0-9]+)", handlers.ListsHandler),
-	(r"/notebook/reviewlist", handlers.ReviewListHandler),
-	(r"/notebook/reviewlist/reviewsystem", handlers.ReviewHandler),
-	(r"/notebook/reviewlist/reviewsystem/definition/([a-zA-Z0-9%]+)", handlers.DefHandler),
+	(r"/notebook/review/", handlers.ReviewListHandler),
+	(r"/notebook/review", handlers.ReviewHandler),
+	(r"/notebook/definition/([a-zA-Z0-9%]+)", handlers.DefHandler),
 	(r"/static/(.+)", tornado.web.StaticFileHandler)
 ], **settings)
 db = persistence.Persistence()
