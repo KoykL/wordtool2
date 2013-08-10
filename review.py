@@ -70,7 +70,7 @@ class reviewListPersistence:
 	def insertReviewList(self, words, CollectionName, listNum):	
 		def mapper(collection, listnum):
 			currentTime = time.time()
-			return lambda word: {'username': self._username, 'reviewState': 0, 'lastTimeReview': currentTime, 'belongTo':{'collection': collection, 'list': listnum}, 'word': word}	
+			return lambda word: {'username': self._username, 'reviewState': 0, 'lastTimeReview': currentTime, 'belongTo':{'collection': collection, 'list': listnum}, 'word': word, 'inReviewPack': False}	
 		exsisted = self._reviewListisExisisted(CollectionName, listNum)
 		if exsisted:
 			raise listWordExistedError()
