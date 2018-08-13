@@ -232,7 +232,7 @@ class ReviewHandler(BaseHandler):
 					self.application.db.insertCollection(self.current_user, 'tortured')
 				if not self.application.db.collectionisInited(self.current_user, 'tortured'):
 					self.application.db.addList(self.current_user, 'tortured')
-				listsLen = int(self.application.db.getListsLen())
+				listsLen = int(self.application.db.getListsLen(self.current_user, 'tortured'))
 				self.application.db.addWord(self.current_user, 'tortured', listsLen, word)
 			if self._rdb.getWord() == None:
 				reply('end')
