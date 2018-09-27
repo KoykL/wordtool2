@@ -5,7 +5,13 @@ makeDeleteBtn=function(word){
 	return $('<a>').addClass('btn btn-danger btn-mini pull-right delete-word-btn').text('delete').attr('delete-id', word).click(deleteWordHandler);
 }
 appendColumn=function(lastrow, word){
-	lastrow.append($("<td>").append($("<p>").text(word).addClass('text-center').append(makeDeleteBtn(word))));
+    var td = $("<td>");
+    var row = $("<div>").addClass('row-fluid');
+    row
+	.append($("<div>").addClass("span9 text-center").append($("<span>").text(word)))
+	.append($("<div>").addClass("span3").append(makeDeleteBtn(word)));
+    td.append(row)
+    lastrow.append(td);
 };
 newWordCallback=function(data){
 	var lastrow = listGetLastRow();
