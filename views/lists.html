@@ -32,7 +32,16 @@
 					{% for group in words%}
 					<tr>
 						{% for word in group %}
-						<td><p class="text-center">{{ word }}<a class="btn btn-danger btn-mini pull-right delete-word-btn" delete-id="{{ word }}">delete</a></p></td>
+						<td>
+						  <div class="row-fluid">
+						   <div class="span9 text-center">
+						     <span>{{ word }}</span>
+						   </div>
+						   <div class="span3">
+						     <a class="btn btn-danger btn-mini pull-right delete-word-btn" delete-id="{{ word }}">delete</a>
+						   </div>
+						  </div>
+						</td>
 						{% end %}
 					</tr>
 					{% end %}
