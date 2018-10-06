@@ -5,6 +5,7 @@ gevent.monkey.patch_all()
 import tornado.web, tornado.wsgi, uimodules
 import handlers, persistence
 import config
+import caching
 
 settings = {
 	'debug': config.getDebug(), 
@@ -36,7 +37,9 @@ application = tornado.wsgi.WSGIApplication([
 	(r"/static/(.+)", tornado.web.StaticFileHandler)
 ], **settings)
 db = persistence.Persistence()
+raw_db = db.getUnderlyingDb()
 application.db = db
+application.wordCache = caching.WordCache(raw_db)
 def start_server(server, process_count):
 	import multiprocessing
 	server.start()

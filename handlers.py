@@ -260,13 +260,16 @@ class DefHandler(BaseHandler):
 			fromWhere['collection'] = fromcollection
 			fromWhere['list'] = fromlist
 		db=self.application.db.getUnderlyingDb()
-		d = dicts.CachedYouDaoDict(word, db)
+		wordCache = self.application.wordCache
+		d = dicts.CachedYouDaoDict(word, db, wordCache)
+		ed = dicts.CachedEtymDict(word, db, wordCache)
 		defs = " ".join(d.getDef())
 		sens = d.getEgSentence()
 		sen = random.choice(sens)
 		engSen = sen[0]
 		chnSen = sen[1]
-		self.render('def.html', definition=defs, word=word, engSentence = engSen, chnSentence = chnSen, fromWhere=fromWhere)
+		etymsData = ed.getData()
+		self.render('def.html', definition=defs, word=word, engSentence = engSen, chnSentence = chnSen, fromWhere=fromWhere, etyms=etymsData["etym"])
 class NewCollectionHandler(BaseHandler):
 	@tornado.web.authenticated
 	def get(self):
